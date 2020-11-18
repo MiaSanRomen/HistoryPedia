@@ -1,0 +1,43 @@
+﻿@model HistoryPedia.Models.Article
+@{
+    ViewBag.Title = "Editing article";
+}
+<form asp-action="edit" asp-controller="home" asp-route-id="@Model.Id">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Title</label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ShirtInfo" class="control-label">About</label>
+        <input type="text" asp-for="ShirtInfo" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Info" class="control-label">Intro</label>
+        <input type="text" asp-for="Info" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageName" class="control-label">Image</label>
+        <input type="text" asp-for="ImageName" class="form-control" />
+    </div>
+    <a class="btn btn-outline-info btn-block" asp-action="EditBlock" asp-controller="Home">Add an article</a>
+    <table class="table">
+        <tr><td>Article</td><td>About</td></tr>
+        @if (Model.Blocks != null)
+        {
+            @foreach (var item in Model.Blocks)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Text</td>
+                    <td>
+                        <a asp-action="EditBlock" asp-controller="Home" asp-route-idBlock="@item.BlockInfoId">Edit</a> |
+                        <a asp-action="DeleteBlock" asp-controller="Home" asp-route-idBlock="@item.BlockInfoId">Remove</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <div class="form-group">
+        <input type="submit" value="Confirm" class="btn btn-outline-success" />
+    </div>
+</form>
