@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HistoryPedia.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
@@ -63,6 +64,7 @@ namespace HistoryPedia.Controllers
             return NotFound();
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id != null)
@@ -98,6 +100,7 @@ namespace HistoryPedia.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         [HttpGet, ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int? id)
         {
@@ -121,9 +124,9 @@ namespace HistoryPedia.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
             return NotFound();
         }
+
         public ActionResult Index(string name)
         {
             var articles = string.IsNullOrEmpty(name)? db.Articles.ToList() : db.Articles.Where(p => p.Name.Contains(name)).ToList();

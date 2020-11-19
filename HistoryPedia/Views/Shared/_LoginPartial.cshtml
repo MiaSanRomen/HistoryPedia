@@ -4,25 +4,27 @@
     @inject UserManager<IdentityUser> UserManager*@
 
 <ul class="navbar-nav">
-     @if (User.Identity.IsAuthenticated)
-        {
-            <li class="nav-item">
-                <a class="nav-link text-dark">Hello @User.Identity.Name!</a>
-            </li>
-            <li class="nav-item">
-                <form class="form-inline" method="post" asp-controller="Account" asp-action="Logout">
-                    <input type="submit" value="Sign out" />
-                </form>
-            </li>
-        }
-     else
-     {
-
-         <li class="nav-item">
-             <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
-         </li>
-         <li class="nav-item">
-             <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
-         </li>
-     }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark">Hello @User.Identity.Name!</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Favorite" asp-action="Index">Go to favorite</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" method="post" asp-controller="Account" asp-action="Logout">
+                <input class="nav-link text-dark" type="submit" value="Sign out" />
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Log in</a>
+        </li>
+    }
 </ul>

@@ -1,32 +1,33 @@
 ﻿@model HistoryPedia.ViewModels.RegisterViewModel
-
-<h2>Registration</h2>
+@{
+    ViewBag.Title = "Registration";
+}
 
 <form method="post" asp-controller="Account" asp-action="Register">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
-        <div>
-            <label asp-for="Email"></label><br />
-            <input asp-for="Email" />
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label><br />
+            <input asp-for="Email" class="form-control" />
             <span asp-validation-for="Email"></span>
         </div>
-        <div>
-            <label asp-for="UserName"></label><br />
-            <input asp-for="UserName" />
+        <div class="form-group">
+            <label asp-for="UserName" class="control-label"></label><br />
+            <input asp-for="UserName" class="form-control" />
             <span asp-validation-for="UserName"></span>
         </div>
-        <div>
-            <label asp-for="Password"></label><br />
-            <input asp-for="Password" />
+        <div class="form-group">
+            <label asp-for="Password" class="control-label"></label><br />
+            <input asp-for="Password" class="form-control" />
             <span asp-validation-for="Password"></span>
         </div>
-        <div>
-            <label asp-for="PasswordConfirm"></label><br />
-            <input asp-for="PasswordConfirm" />
+        <div class="form-group">
+            <label asp-for="PasswordConfirm" class="control-label"></label><br />
+            <input asp-for="PasswordConfirm" class="form-control" />
             <span asp-validation-for="PasswordConfirm"></span>
         </div>
-        <div>
-            <input type="submit" value="Register" />
+        <div class="form-group">
+            <input type="submit" value="Register" class="btn btn-outline-info btn-block" />
         </div>
     </div>
 </form>

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HistoryPedia.ViewModels;
-using CustomIdentityApp.Models;
+using HistoryPedia.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace CustomIdentityApp.Controllers

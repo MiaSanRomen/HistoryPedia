@@ -170,3 +170,4 @@ G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.MvcApplication
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.csprojAssemblyReference.cache
+G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Favorite\Index.cshtml.g.cs

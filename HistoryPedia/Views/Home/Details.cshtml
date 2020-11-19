@@ -60,6 +60,16 @@
             <button type="button" class="btn btn-outline-success btn-block btn-md">
                 Add to favorite
             </button>
+            
+            
+            @using (Html.BeginForm("AddToFavorite", "Favorite"))
+            {
+                <div class="pull-right">
+                    @Html.HiddenFor(x => x.Id)
+                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                    <input type="submit" class="btn btn-outline-success btn-block btn-md" value="Добавить в корзину" />
+                </div>
+            }
         </div>
         <div class="col-md-8">
         </div>
@@ -73,25 +83,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-@*<h2>@Model.Path</h2>
-<div>
-    <dl class="dl-horizontal">
-        <dd>@Model.Info</dd>
-    </dl>
-    @foreach (var item in Model.Blocks)
-    {
-        <tr>
-            <td>@item.Path</td>
-            <td>@item.Text</td>
-            <td>
-                <a asp-action="Edit" asp-controller="Home" asp-route-id="@item.BlockInfoId">Edit</a> |
-                <a asp-action="Delete" asp-controller="Home" asp-route-id="@item.BlockInfoId">Remove</a>
-            </td>
-        </tr>
-    }
-</div>*@

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Collections.Generic;
+using HistoryPedia.Models;
+using Microsoft.AspNetCore.Identity;
 
-namespace CustomIdentityApp.Models
+namespace HistoryPedia.Models
 {
     public class User : IdentityUser
     {
-        public int Year { get; set; }
+        public List<Article> FavoriteArticles { get; set; }
     }
 }
