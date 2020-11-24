@@ -40,7 +40,8 @@ namespace HistoryPedia
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AccountConnection")));
             services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationContext>();
+                .AddEntityFrameworkStores<ApplicationContext>()
+                .AddDefaultTokenProviders();
 
             services.AddControllersWithViews();
         }
@@ -72,9 +73,6 @@ namespace HistoryPedia
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "articleEdit",
-                    pattern: "{controller=Home}/{action=Edit}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

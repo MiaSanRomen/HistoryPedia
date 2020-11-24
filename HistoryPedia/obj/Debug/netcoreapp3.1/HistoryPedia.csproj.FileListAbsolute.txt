@@ -171,7 +171,10 @@ G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\NLog.dll
 G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\NLog.Extensions.Logging.dll
 G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\NLog.Web.AspNetCore.dll
 G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\NLog.config
+G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.csprojAssemblyReference.cache
+G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\MailKit.dll
+G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\MimeKit.dll
+G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.csproj.CoreCompileInputs.cache
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.MvcApplicationPartsAssemblyInfo.cs
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.MvcApplicationPartsAssemblyInfo.cache
-G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.csprojAssemblyReference.cache
