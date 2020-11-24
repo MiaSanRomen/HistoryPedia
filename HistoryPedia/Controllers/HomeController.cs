@@ -49,13 +49,15 @@ namespace HistoryPedia.Controllers
             if (id != null)
             {
                 Article article = await db.Articles.FirstOrDefaultAsync(p => p.Id == id);
-                //article.Picture = db.Images.Where(x => x.ArticleId == article.Id).Last();
                 article.Blocks = db.BlocksInfo.Where(x => x.ArticleId == article.Id).ToList();
                 var images = db.Images;
                 article.Image = images.FirstOrDefault(x => x.Name == article.ImageName);
                 foreach (var item in article.Blocks)
                 {
-                    item.Image = images.FirstOrDefault(x => x.Name == item.ImageName);
+                    if (item.BlockImageName == null)
+                        item.Image = images.FirstOrDefault(x => x.Name == "Def1");
+                    else
+                        item.Image = images.FirstOrDefault(x => x.Name == item.BlockImageName);
                 }
                 if (article != null)
                     return View(article);
@@ -65,9 +67,9 @@ namespace HistoryPedia.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id != null)
+            if (id != 0)
             {
                 Article article = await db.Articles.FirstOrDefaultAsync(p => p.Id == id);
                 if (article != null)
@@ -155,38 +157,40 @@ namespace HistoryPedia.Controllers
         {
             if (idBlock != null)
             {
-                BlockInfo blockInfo = new BlockInfo { BlockInfoId = idBlock.Value };
-                Article article = db.Articles.FirstOrDefault(p => p.Id == blockInfo.ArticleId);
-                db.Articles.Update(article);
-                article.Blocks = db.BlocksInfo.Where(x => x.ArticleId == article.Id).ToList();
-                article.Blocks.Remove(blockInfo);
-                db.Entry(blockInfo).State = EntityState.Deleted;
-
-                await db.SaveChangesAsync();
-                return RedirectToAction("Edit", article.Id);
+                BlockInfo blockInfo = await db.BlocksInfo.FirstOrDefaultAsync(p => p.BlockInfoId == idBlock);
+                if (blockInfo != null)
+                {
+                    db.BlocksInfo.Remove(blockInfo);
+                    await db.SaveChangesAsync();
+                    //return RedirectToAction("Edit", "Home", blockInfo.ArticleId);
+                    Article article = await db.Articles.FirstOrDefaultAsync(p => p.Id == blockInfo.ArticleId);
+                    article.Blocks = db.BlocksInfo.Where(x => x.ArticleId == article.Id).ToList();
+                    return View("Edit", article);
+                }
             }
-
             return NotFound();
         }
 
-        public async Task<IActionResult> EditBlock(int? idBlock)
+        public async Task<IActionResult> EditBlock(int? idBlock, int id)
         {
             if (idBlock != null)
             {
                 BlockInfo blockInfo = await db.BlocksInfo.FirstOrDefaultAsync(p => p.BlockInfoId == idBlock);
                 if (blockInfo != null)
                 {
+                    blockInfo.PrevId = blockInfo.BlockInfoId;
                     return View(blockInfo);
                 }
             }
             else
             {
                 BlockInfo blockInfo = new BlockInfo();
+                blockInfo.ArticleId = id;
                 db.BlocksInfo.Add(blockInfo);
                 await db.SaveChangesAsync();
+                blockInfo.PrevId = db.BlocksInfo.ToList().Last().BlockInfoId;
                 return View(blockInfo);
             }
-
             return NotFound();
         }
 
@@ -194,13 +198,21 @@ namespace HistoryPedia.Controllers
         public async Task<IActionResult> EditBlock(BlockInfo blockInfo)
         {
             db.BlocksInfo.Update(blockInfo);
-            if (string.IsNullOrEmpty(blockInfo.ImageName))
+            if (string.IsNullOrEmpty(blockInfo.BlockImageName))
             {
-                blockInfo.ImageName = "Def1";
+                blockInfo.BlockImageName = "Def1";
             }
-            blockInfo.Image = db.Images.FirstOrDefault(x => x.Name == blockInfo.ImageName);
+            blockInfo.Image = db.Images.FirstOrDefault(x => x.Name == blockInfo.BlockImageName);
             await db.SaveChangesAsync();
-            return RedirectToAction("Edit", blockInfo.ArticleId);
+            var deleteBlock = db.BlocksInfo.FirstOrDefault(x => x.BlockInfoId == blockInfo.PrevId);
+            if (deleteBlock!= null)
+            {
+                db.BlocksInfo.Remove(deleteBlock);
+            }
+            await db.SaveChangesAsync();
+            Article article = await db.Articles.FirstOrDefaultAsync(p => p.Id == blockInfo.ArticleId);
+            article.Blocks = db.BlocksInfo.Where(x => x.ArticleId == article.Id).ToList();
+            return View("Edit", article);
         }
     }
 }

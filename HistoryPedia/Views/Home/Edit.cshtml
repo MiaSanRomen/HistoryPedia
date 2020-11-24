@@ -19,7 +19,7 @@
         <label asp-for="ImageName" class="control-label">Image</label>
         <input type="text" asp-for="ImageName" class="form-control" />
     </div>
-    <a class="btn btn-outline-info btn-block" asp-action="EditBlock" asp-controller="Home">Add an article</a>
+    <a class="btn btn-outline-info btn-block" asp-action="EditBlock" asp-controller="Home" asp-route-id="@Model.Id">Add an article</a>
     <table class="table">
         <tr><td>Article</td><td>About</td></tr>
         @if (Model.Blocks != null)
@@ -27,7 +27,7 @@
             @foreach (var item in Model.Blocks)
             {
                 <tr>
-                    <td>@item.Name</td>
+                    <td>@item.BlockName</td>
                     <td>@item.Text</td>
                     <td>
                         <a asp-action="EditBlock" asp-controller="Home" asp-route-idBlock="@item.BlockInfoId">Edit</a> |

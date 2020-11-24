@@ -32,18 +32,28 @@ namespace HistoryPedia.Controllers
             return View(user);
         }
 
-        public async Task<RedirectToActionResult> AddToFavorite(int articleId, string returnUrl)
+        [Authorize]
+        public async Task<IActionResult> AddToFavorite(int id)
         {
-            Article article = db.Articles.FirstOrDefault(g => g.Id == articleId);
-            db.Articles.Update(article);
+            Article article = db.Articles.FirstOrDefault(g => g.Id == id);
+            User user = dbUsers.Users.FirstOrDefault(g => g.UserName == User.Identity.Name);
+            dbUsers.Users.Update(user);
             if (article != null)
             {
-                User user = dbUsers.Users.FirstOrDefault(g => g.UserName == User.Identity.Name);
-                user.FavoriteArticles.Add(article);
+                if (user.FavoriteArticles == null)
+                {
+                    user.FavoriteArticles = new List<Article>() {article};
+                }
+                else
+                {
+                    user.FavoriteArticles.Add(article);
+                }
             }
             await db.SaveChangesAsync();
-            return RedirectToAction("Details", "Home", new { returnUrl });
+            return RedirectToAction("Index");
         }
+
+        
 
         //public RedirectToRouteResult RemoveFromFavorite(int gameId, string returnUrl)
         //{

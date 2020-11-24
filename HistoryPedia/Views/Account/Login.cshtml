@@ -2,23 +2,27 @@
 @{
     ViewBag.Title = "Sign in";
 }
-
+<div class="page-header">
+    <h1>
+        Sign in
+    </h1>
+</div>
 <form method="post" asp-controller="Account" asp-action="Login"
       asp-route-returnUrl="@Model.ReturnUrl">
     <div class="validation" asp-validation-summary="ModelOnly"></div>
     <div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label">Fill Email</label>
-                <input type="text" asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label">Fill password</label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Sign in" class="btn btn-outline-success btn-block" />
-            </div>
+        <div class="form-group">
+            <label asp-for="UserName" class="control-label">Fill Email</label>
+            <input type="text" asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="control-label">Fill password</label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Log in" class="btn btn-outline-success btn-block" />
+        </div>
     </div>
 </form>

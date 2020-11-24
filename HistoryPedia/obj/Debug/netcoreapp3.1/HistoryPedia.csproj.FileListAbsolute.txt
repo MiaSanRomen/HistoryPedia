@@ -164,10 +164,14 @@ G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.W
 G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Favorite\Index.cshtml.g.cs
+G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\NLog.dll
+G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\NLog.Extensions.Logging.dll
+G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\NLog.Web.AspNetCore.dll
+G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\NLog.config
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.csproj.CoreCompileInputs.cache
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.MvcApplicationPartsAssemblyInfo.cs
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.MvcApplicationPartsAssemblyInfo.cache
-G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
-G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.csprojAssemblyReference.cache
-G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Favorite\Index.cshtml.g.cs
