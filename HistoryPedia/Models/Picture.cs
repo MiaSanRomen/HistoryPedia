@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 namespace HistoryPedia.Models
 {
-    public class TableImage
+    public class Picture
     {
-        public int TableImageId { get; set; }
+        public int PictureId { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
         public string Text { get; set; }
+        public byte[] Image { get; set; }
     }
 }

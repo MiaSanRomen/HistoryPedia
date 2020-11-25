@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using HistoryPedia.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Web;
 
 namespace HistoryPedia.Controllers
 {
@@ -50,14 +52,14 @@ namespace HistoryPedia.Controllers
             {
                 Article article = await db.Articles.FirstOrDefaultAsync(p => p.Id == id);
                 article.Blocks = db.BlocksInfo.Where(x => x.ArticleId == article.Id).ToList();
-                var images = db.Images;
-                article.Image = images.FirstOrDefault(x => x.Name == article.ImageName);
+                var Pictures = db.Pictures;
+                article.Image = Pictures.FirstOrDefault(x => x.Name == article.ImageName);
                 foreach (var item in article.Blocks)
                 {
                     if (item.BlockImageName == null)
-                        item.Image = images.FirstOrDefault(x => x.Name == "Def1");
+                        item.Image = Pictures.FirstOrDefault(x => x.Name == "Def1");
                     else
-                        item.Image = images.FirstOrDefault(x => x.Name == item.BlockImageName);
+                        item.Image = Pictures.FirstOrDefault(x => x.Name == item.BlockImageName);
                 }
                 if (article != null)
                     return View(article);
@@ -97,7 +99,7 @@ namespace HistoryPedia.Controllers
             {
                 article.ImageName = "DefIco";
             }
-            article.Image = db.Images.FirstOrDefault(x => x.Name == article.ImageName);
+            article.Image = db.Pictures.FirstOrDefault(x => x.Name == article.ImageName);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -134,7 +136,7 @@ namespace HistoryPedia.Controllers
             var articles = string.IsNullOrEmpty(name)? db.Articles.ToList() : db.Articles.Where(p => p.Name.Contains(name)).ToList();
             foreach (var item in articles)
             {
-                item.Image = db.Images.FirstOrDefault(x => x.Name == item.ImageName);
+                item.Image = db.Pictures.FirstOrDefault(x => x.Name == item.ImageName);
             }
             return View(articles);
         }
@@ -202,7 +204,7 @@ namespace HistoryPedia.Controllers
             {
                 blockInfo.BlockImageName = "Def1";
             }
-            blockInfo.Image = db.Images.FirstOrDefault(x => x.Name == blockInfo.BlockImageName);
+            blockInfo.Image = db.Pictures.FirstOrDefault(x => x.Name == blockInfo.BlockImageName);
             await db.SaveChangesAsync();
             var deleteBlock = db.BlocksInfo.FirstOrDefault(x => x.BlockInfoId == blockInfo.PrevId);
             if (deleteBlock!= null)
@@ -214,5 +216,27 @@ namespace HistoryPedia.Controllers
             article.Blocks = db.BlocksInfo.Where(x => x.ArticleId == article.Id).ToList();
             return View("Edit", article);
         }
+
+        //[HttpPost]
+        //public ActionResult Create(Picture pic, HttpPostedFileBase uploadImage)
+        //{
+        //    if (ModelState.IsValid && uploadImage != null)
+        //    {
+        //        byte[] imageData = null;
+        //        // считываем переданный файл в массив байтов
+        //        using (var binaryReader = new BinaryReader(uploadImage.InputStream))
+        //        {
+        //            imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
+        //        }
+        //        // установка массива байтов
+        //        pic.Image = imageData;
+
+        //        db.Pictures.Add(pic);
+        //        db.SaveChanges();
+
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(pic);
+        //}
     }
 }

@@ -13,7 +13,7 @@ namespace HistoryPedia.Models
         public int PrevId { get; set; }
         public string Text { get; set; }
         public string BlockImageName { get; set; }
-        public TableImage Image { get; set; }
+        public Picture Image { get; set; }
         public int ArticleId { get; set; }
     }
 }

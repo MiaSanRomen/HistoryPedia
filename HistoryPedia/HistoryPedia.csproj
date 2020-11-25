@@ -6,9 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Images\RomanEmp1.png" />
-    <None Include="wwwroot\Images\RomanEmp2.jpg" />
-    <None Include="wwwroot\Images\RomanEmpIco.png" />
+    <Compile Remove="wwwroot\Pictures\**" />
+    <Content Remove="wwwroot\Pictures\**" />
+    <EmbeddedResource Remove="wwwroot\Pictures\**" />
+    <None Remove="wwwroot\Pictures\**" />
   </ItemGroup>
 
   <ItemGroup>

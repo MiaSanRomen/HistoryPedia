@@ -14,7 +14,7 @@ namespace HistoryPedia.Models
         public DbSet<Kind> Kinds { get; set; }
         public DbSet<Link> Links { get; set; }
         public DbSet<BlockInfo> BlocksInfo { get; set; }
-        public DbSet<TableImage> Images { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
 
         public ArticleContext(DbContextOptions<ArticleContext> options)
             : base(options)

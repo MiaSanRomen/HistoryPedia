@@ -199,57 +199,57 @@ namespace HistoryPedia.Data
                 context.SaveChanges();
             }
 
-            if (!context.Images.Any())
+            if (!context.Pictures.Any())
             {
-                context.Images.AddRange(
-                    new TableImage()
+                context.Pictures.AddRange(
+                    new Picture()
                     {
                         Name = "RomanEmpIco",
                         Path = "/Images/RomanEmpIco.png",
                     },
-                    new TableImage()
+                    new Picture()
                     {
                         Name = "RomanEmp1",
                         Path = "/Images/RomanEmp1.png",
                         Text = "Map of the Roman Empire"
                     },
-                    new TableImage()
+                    new Picture()
                     {
                         Name = "RomanEmp2",
                         Path = "/Images/RomanEmp2.jpg",
                         Text = "The first Roman emperor Octavian Augustus"
                     },
-                    new TableImage()
+                    new Picture()
                     {
                         Name = "ByzantIco",
                         Path = "/Images/ByzantIco.png",
                     },
-                    new TableImage()
+                    new Picture()
                     {
                         Name = "RepublicIco",
                         Path = "/Images/RepublicIco.png",
                     },
-                    new TableImage()
+                    new Picture()
                     {
                         Name = "CarthageIco",
                         Path = "/Images/CarthageIco.png",
                     },
-                    new TableImage()
+                    new Picture()
                     {
                         Name = "PunicIco",
                         Path = "/Images/PunicIco.jpg",
                     },
-                    new TableImage()
+                    new Picture()
                     {
                         Name = "ArmyIco",
                         Path = "/Images/ArmyIco.jpg",
                     },
-                    new TableImage()
+                    new Picture()
                     {
                         Name = "DefIco",
                         Path = "/Images/DefIco.png",
                     },
-                    new TableImage()
+                    new Picture()
                     {
                         Name = "Def1",
                         Path = "/Images/Def1.jpg",

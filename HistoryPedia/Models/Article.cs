@@ -14,7 +14,8 @@ namespace HistoryPedia.Models
         public string Info { get; set; }
         public string ImageName { get; set; }
         public List<BlockInfo> Blocks { get; set; }
-        public TableImage Image { get; set; }
+        public Picture Image { get; set; }
+        public string UserId { get; set; }
     }
 
 }
