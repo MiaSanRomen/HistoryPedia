@@ -24,8 +24,8 @@
         <div class="col-md-1">
         </div>
         <div class="col-md-2">
-            <img alt="Bootstrap Image Preview" src="@Model.Image.Path" class="rounded-circle">
-            </div>
+            <img alt="Bootstrap Image Preview" src="@Model.Image.Path">
+        </div>
     </div>
 
     @foreach (var item in Model.Blocks)
@@ -57,14 +57,18 @@
 
     <div class="row">
         <div class="col-md-2">
-            <a type="button" class="btn btn-block btn-outline-info" asp-action="AddToFavorite" asp-controller="Favorite" asp-route-id="@Model.Id">
-                Add to favorite
-            </a>
-            @*<form asp-controller="Favorite" asp-action="AddToFavorite" asp-route-id="@Model.Id" method="post">
-                <div class="form-group">
-                    <input type="submit" class="btn btn-outline-info" value="Add to favorite" />
-                </div>
-            </form>*@
+            @if (Model.UserId == null)
+            {
+                <a type="button" class="btn btn-block btn-outline-info" asp-action="AddToFavorite" asp-controller="Favorite" asp-route-id="@Model.Id">
+                    Add to favorite
+                </a>
+            }
+            else
+            {
+                <a type="button" class="btn btn-block btn-outline-danger" asp-action="RemoveFromFavorite" asp-controller="Favorite" asp-route-id="@Model.Id">
+                    Remove from favorite
+                </a>
+            }
         </div>
         <div class="col-md-8">
         </div>

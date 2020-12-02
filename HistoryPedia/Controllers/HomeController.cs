@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Web;
+using HistoryPedia.signalR;
+using Microsoft.AspNetCore.SignalR;
 
 namespace HistoryPedia.Controllers
 {
@@ -19,13 +21,16 @@ namespace HistoryPedia.Controllers
 
         private ArticleContext db;
         private readonly ILogger<HomeController> _logger;
+        private ApplicationContext dbUsers;
+        IHubContext<ChatHub> hubContext;
 
-        public HomeController(ILogger<HomeController> logger, ArticleContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationContext contextApp, ArticleContext contextArt, IHubContext<ChatHub> hubContext)
         {
-            db = context;
+            db = contextArt;
+            dbUsers = contextApp;
             _logger = logger;
+            this.hubContext = hubContext;
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create(Article article)
@@ -138,7 +143,13 @@ namespace HistoryPedia.Controllers
             {
                 item.Image = db.Pictures.FirstOrDefault(x => x.Name == item.ImageName);
             }
-            return View(articles);
+            User user = dbUsers.Users.ToList().FirstOrDefault(g => g.UserName == User.Identity.Name);
+
+            SearchArticle dataArticles = new SearchArticle();
+            dataArticles.Articles = articles;
+            dataArticles.User = user;
+            db.SaveChanges();
+            return View(dataArticles);
         }
 
         [HttpGet, ActionName("DeleteBlock")]
@@ -238,5 +249,19 @@ namespace HistoryPedia.Controllers
         //    }
         //    return View(pic);
         //}
+
+        [Authorize]
+        public IActionResult Chat()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> SendChat(string message)
+        {
+            await hubContext.Clients.All.SendAsync("Send", $"{User.Identity.Name}: {message} - {DateTime.Now.ToShortTimeString()}");
+            return RedirectToAction("Index");
+        }
     }
 }

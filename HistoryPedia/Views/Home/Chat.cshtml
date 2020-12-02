@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "History chat";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                You can talk now!
+            </h3>
+            <div class="row">
+            </div>
+            
+            <form action='@Url.Action("SendChat")' method="post">
+                <input type="text" name="message" />
+                <input type="submit" value="Send" />
+            </form>
+            <div id="send"></div>
+            <script src="js/signalr/dist/browser/signalr.min.js"></script>
+            <script>
+                const hubConnection = new signalR.HubConnectionBuilder()
+                    .withUrl("/chat")
+                    .build();
+
+                // получение сообщения от сервера
+                hubConnection.on('Send',
+                    function(message) {
+
+                        // создает элемент <p> для сообщения пользователя
+                        let elem = document.createElement("p");
+                        elem.appendChild(document.createTextNode(message));
+
+                        document.getElementById("send").appendChild(elem);
+
+                    });
+                hubConnection.start();
+            </script>
+        </div>
+    </div>
+</div>

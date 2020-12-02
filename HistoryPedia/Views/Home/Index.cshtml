@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HistoryPedia.Models.Article>
+﻿@model HistoryPedia.Models.SearchArticle
 @{
     ViewBag.Title = "All articles";
 }
@@ -16,7 +16,7 @@
                     History is a teacher of life.
                 </p>
                 <footer class="blockquote-footer">
-                    Marcus Tullius Cicero 
+                    Marcus Tullius Cicero
                 </footer>
             </blockquote>
         </div>
@@ -46,7 +46,7 @@
             <div class="row">
             </div>
             <div class="row">
-                @foreach (var item in Model)
+                @foreach (var item in Model.Articles)
                 {
                     <div class="col-md-4">
                         <div class="card">
@@ -70,18 +70,72 @@
             </div>
         </div>
     </div>
-</div>
-
-
-@*<table class="table">
-    <tr><td>Article</td><td>About</td></tr>
-    @foreach (var item in Model)
+    <div class="row">
+    </div>
+    <h3>
+        Here is our chat
+    </h3>
+    @if (Model.User == null)
     {
-        <tr><td><a asp-action="Details" asp-controller="Home" asp-route-id="@item.Id">@item.Path</a></td>
-            <td>@item.Info</td>
-            <td>
-                <a asp-action="Edit" asp-controller="Home" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-controller="Home" asp-route-id="@item.Id">Remove</a>
-            </td></tr>
+        <h5>
+            You need to be <a asp-action="Login" asp-controller="Account">authorized</a> first
+        </h5>
     }
-</table>*@
+    else
+    {
+        <div class="row">
+        </div>
+        <h6>
+            You can ask your questions here or just relax
+        </h6>
+        <div class="row">
+        </div>
+
+        <div id="inputForm">
+            <div class="form-group">
+                <input type="text" disabled="disabled" id="author" value="@Model.User.UserName" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="text" id="message" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="button" id="sendBtn" value="Send" class="btn btn-outline-success btn-block"/>
+            </div>
+        </div>
+        <div id="chatroom"></div>
+        <script src="js/signalr/dist/browser/signalr.min.js"></script>
+        <script>
+            const hubConnection = new signalR.HubConnectionBuilder()
+                .withUrl("/chat")
+                .build();
+
+            let userName = '';
+
+            hubConnection.on("Send",
+                function(data, userName) {
+
+                    let userNameElem = document.createElement("b");
+                    userNameElem.appendChild(document.createTextNode(userName + ': '));
+
+
+                    let elem = document.createElement("p");
+                    elem.appendChild(userNameElem);
+                    elem.appendChild(document.createTextNode(data));
+
+                    let firstElem = document.getElementById("chatroom").firstChild;
+                    document.getElementById("chatroom").insertBefore(elem, firstElem);
+
+                });
+
+            document.getElementById("sendBtn").addEventListener("click",
+                function(e) {
+                    let message = document.getElementById("message").value;
+                    userName = document.getElementById("author").value;
+
+                    hubConnection.invoke("Send", message, userName);
+                });
+
+            hubConnection.start();
+        </script>
+    }
+</div>

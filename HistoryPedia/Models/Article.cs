@@ -8,7 +8,7 @@ namespace HistoryPedia.Models
 {
     public class Article
     {
-        [Key] public int Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string ShirtInfo { get; set; }
         public string Info { get; set; }
