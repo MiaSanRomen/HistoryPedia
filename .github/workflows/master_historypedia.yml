@@ -18,7 +18,7 @@ jobs:
     - name: Set up .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '3.1.102'
+        dotnet-version: '5.0.x'
 
     - name: Build with dotnet
       run: dotnet build --configuration Release
@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'historypedia'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_8e925d92bf1a405ea5ced8bae9622f2a }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_1654be3ab4644d7b97c8f0661e65422d }}
         package: ${{env.DOTNET_ROOT}}/myapp 
