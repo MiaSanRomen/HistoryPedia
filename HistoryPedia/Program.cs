@@ -9,13 +9,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using HistoryPedia.Data;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace HistoryPedia
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
 
             var host = CreateHostBuilder(args).Build();
@@ -26,7 +27,10 @@ namespace HistoryPedia
                 try
                 {
                     var context = services.GetRequiredService<ArticleContext>();
-                    DataClass.Initialize(context);
+                    DataClass.Initialize(context); 
+                    var userManager = services.GetRequiredService<UserManager<User>>();
+                    var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    await RoleInitializer.InitializeAsync(userManager, rolesManager);
                 }
                 catch (Exception ex)
                 {

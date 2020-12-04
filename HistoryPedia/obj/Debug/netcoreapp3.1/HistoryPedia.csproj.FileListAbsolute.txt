@@ -182,3 +182,8 @@ G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Favorite\AddToF
 G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\link.json
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Home\Chat.cshtml.g.cs
 G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.csprojAssemblyReference.cache
+G:\HistoryPedia\HistoryPedia\bin\Debug\netcoreapp3.1\web.config
+G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Users\Create.cshtml.g.cs
+G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Users\Edit.cshtml.g.cs
+G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Users\Index.cshtml.g.cs
+G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Users\EditRoles.cshtml.g.cs

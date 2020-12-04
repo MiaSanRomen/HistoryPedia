@@ -181,3 +181,9 @@ G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\staticwebassets\HistoryPe
 G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\HistoryPedia.dll
 G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\HistoryPedia.pdb
 G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\HistoryPedia.genruntimeconfig.cache
+G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\Razor\Views\Home\Chat.cshtml.g.cs
+G:\HistoryPedia\HistoryPedia\bin\Release\netcoreapp3.1\web.config
+G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\Razor\Views\Users\Create.cshtml.g.cs
+G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\Razor\Views\Users\Edit.cshtml.g.cs
+G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\Razor\Views\Users\EditRoles.cshtml.g.cs
+G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\Razor\Views\Users\Index.cshtml.g.cs

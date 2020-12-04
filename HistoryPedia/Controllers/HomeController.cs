@@ -73,7 +73,7 @@ namespace HistoryPedia.Controllers
             return NotFound();
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id)
         {
             if (id != 0)
