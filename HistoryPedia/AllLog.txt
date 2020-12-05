@@ -1,0 +1,6 @@
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\Andrew\source\repos\MiaSanRomen\HistoryPedia\HistoryPedia
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\Andrew\source\repos\MiaSanRomen\HistoryPedia\HistoryPedia
