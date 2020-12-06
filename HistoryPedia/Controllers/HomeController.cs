@@ -109,7 +109,7 @@ namespace HistoryPedia.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpGet, ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int? id)
         {
