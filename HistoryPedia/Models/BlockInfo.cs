@@ -10,10 +10,12 @@ namespace HistoryPedia.Models
     {
         public int BlockInfoId { get; set; }
         public string BlockName { get; set; }
-        public int PrevId { get; set; }
+        public string PrevName { get; set; }
         public string Text { get; set; }
         public string BlockImageName { get; set; }
         public Picture Image { get; set; }
         public int ArticleId { get; set; }
+        public string ArticleName { get; set; }
+
     }
 }

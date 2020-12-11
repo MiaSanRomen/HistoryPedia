@@ -19,9 +19,9 @@
         <label asp-for="ImageName" class="control-label">Image</label>
         <input type="text" asp-for="ImageName" class="form-control" />
     </div>
-    <a class="btn btn-outline-info btn-block" asp-action="EditBlock" asp-controller="Home" asp-route-id="@Model.Id">Add an article</a>
+    <a class="btn btn-outline-info btn-block" asp-action="EditBlock" asp-controller="Home" asp-route-article="@Model">Add a paragraph</a>
     <table class="table">
-        <tr><td>Article</td><td>About</td></tr>
+        <tr><td>Paragraph</td><td>About</td></tr>
         @if (Model.Blocks != null)
         {
             @foreach (var item in Model.Blocks)
@@ -30,8 +30,8 @@
                     <td>@item.BlockName</td>
                     <td>@item.Text</td>
                     <td>
-                        <a asp-action="EditBlock" asp-controller="Home" asp-route-idBlock="@item.BlockInfoId">Edit</a> |
-                        <a asp-action="DeleteBlock" asp-controller="Home" asp-route-idBlock="@item.BlockInfoId">Remove</a>
+                        <a asp-action="EditBlock" asp-controller="Home" asp-route-idBlock="@item.BlockInfoId" asp-route-blockName="@item.BlockName">Edit</a> |
+                        <a asp-action="DeleteBlock" asp-controller="Home" asp-route-idBlock="@item.BlockInfoId" asp-route-name="@item.BlockName">Remove</a>
                     </td>
                 </tr>
             }

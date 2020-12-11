@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "L1+wIMeTf2DDDf5mFGeOLgATsPm/0DgSurtwLA5MNuVuLAGlw5gguhuxEUW39GB8FlPc+SBUxV5bzJsoGyowfQ==",
+  "dgSpecHash": "Y68Uj1Ngu6d16/mQxmIurv6f7ALKGyw/YlgQUAORl4ZpQo7Vlfy9gX2vQcuFsVv/2fGzfC2Xfpb+7/dcRgXKEw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Andrew\\source\\repos\\MiaSanRomen\\HistoryPedia\\HistoryPedia\\HistoryPedia.csproj",
+  "projectFilePath": "G:\\HistoryPedia\\HistoryPedia\\HistoryPedia.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Andrew\\.nuget\\packages\\mailkit\\2.10.0\\mailkit.2.10.0.nupkg.sha512",
     "C:\\Users\\Andrew\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.9\\microsoft.aspnetcore.cryptography.internal.3.1.9.nupkg.sha512",

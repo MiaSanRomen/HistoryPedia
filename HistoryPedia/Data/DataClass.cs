@@ -8,6 +8,9 @@ namespace HistoryPedia.Data
 {
     public static class DataClass
     {
+
+        public static Article TempArticle = new Article();
+        public static List<BlockInfo> TempList = new List<BlockInfo>();
         public static void Initialize(ArticleContext context)
         {
             if (!context.Articles.Any())
@@ -29,6 +32,7 @@ namespace HistoryPedia.Data
                                 Text =
                                     "The history of the Roman Empire covers the history of ancient Rome from the fall of the Roman Republic in 27 BC until the abdication of Romulus Augustulus in AD 476 in the West, and the Fall of Constantinople in the East in AD 1453. Ancient Rome became a territorial empire while still a republic, but was then ruled by Roman emperors beginning with Augustus (r. 27 BC – 14 AD), becoming the Roman Empire following the death of the last republican dictator, the first emperor's adoptive father Julius Caesar.",
                                 BlockImageName = "RomanEmp1",
+                                ArticleName = "Roman Empire"
                             },
                             new BlockInfo
                             {
@@ -36,6 +40,7 @@ namespace HistoryPedia.Data
                                 Text =
                                     "The Latin word imperator derives from the stem of the verb imperare, meaning 'to order, to command'. It was originally employed as a title roughly equivalent to commander under the Roman Republic. Later it became a part of the titulature of the Roman Emperors as part of their cognomen. The English word emperor derives from imperator via Old French: Empereür. The Roman emperors themselves generally based their authority on multiple titles and positions, rather than preferring any single title. Nevertheless, imperator was used relatively consistently as an element of a Roman ruler's title throughout the principate and the dominate.",
                                 BlockImageName = "RomanEmp2",
+                                ArticleName = "Roman Empire"
                             },
 
                         }
