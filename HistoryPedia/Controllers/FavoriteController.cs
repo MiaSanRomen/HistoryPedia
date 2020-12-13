@@ -41,7 +41,7 @@ namespace HistoryPedia.Controllers
             {
                 foreach (var item in user.FavoriteArticles)
                 {
-                    item.Image = db.Pictures.FirstOrDefault(x => x.Name == item.ImageName);
+                    item.Image = db.Pictures.FirstOrDefault(x => x.PictureName == item.ImageName);
                 }
             }
             db.SaveChanges();

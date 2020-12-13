@@ -13,7 +13,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Web;
 using HistoryPedia.Data;
 using HistoryPedia.signalR;
+using HistoryPedia.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
+
 
 namespace HistoryPedia.Controllers
 {
@@ -59,13 +62,13 @@ namespace HistoryPedia.Controllers
                 Article article = await db.Articles.FirstOrDefaultAsync(p => p.Id == id);
                 article.Blocks = db.BlocksInfo.Where(x => x.ArticleId == article.Id).ToList();
                 var Pictures = db.Pictures;
-                article.Image = Pictures.FirstOrDefault(x => x.Name == article.ImageName);
+                article.Image = Pictures.FirstOrDefault(x => x.PictureName == article.ImageName);
                 foreach (var item in article.Blocks)
                 {
                     if (item.BlockImageName == null)
-                        item.Image = Pictures.FirstOrDefault(x => x.Name == "Def1");
+                        item.Image = Pictures.FirstOrDefault(x => x.PictureName == "Def1");
                     else
-                        item.Image = Pictures.FirstOrDefault(x => x.Name == item.BlockImageName);
+                        item.Image = Pictures.FirstOrDefault(x => x.PictureName == item.BlockImageName);
                 }
                 if (article != null)
                     return View(article);
@@ -108,7 +111,7 @@ namespace HistoryPedia.Controllers
             var articles = string.IsNullOrEmpty(name)? db.Articles.ToList() : db.Articles.Where(p => p.Name.Contains(name)).ToList();
             foreach (var item in articles)
             {
-                item.Image = db.Pictures.FirstOrDefault(x => x.Name == item.ImageName);
+                item.Image = db.Pictures.FirstOrDefault(x => x.PictureName == item.ImageName);
                 item.Blocks = db.BlocksInfo.Where(x => x.ArticleId == item.Id).ToList();
 
                 foreach (var block in item.Blocks)
@@ -143,7 +146,7 @@ namespace HistoryPedia.Controllers
             {
                 Article article = new Article();
                 article.Name = "New article";
-                article.Blocks = DataClass.TempList;
+                article.Blocks = DataClass.BlocksTempList;
                 DataClass.TempArticle = article;
                 return View(article);
             }
@@ -160,19 +163,31 @@ namespace HistoryPedia.Controllers
             {
                 article.ImageName = "DefIco";
             }
-            article.Image = db.Pictures.FirstOrDefault(x => x.Name == article.ImageName);
+            article.Image = db.Pictures.FirstOrDefault(x => x.PictureName == article.ImageName);
 
-            if (DataClass.TempList.Count != 0)
+            if (DataClass.BlocksTempList.Count != 0)
             {
-                foreach (var item in DataClass.TempList)
+                foreach (var item in DataClass.BlocksTempList)
                 {
-                    //item.BlockInfoId = db.BlocksInfo.Last().BlockInfoId;
                     item.ArticleId = article.Id;
-                    //db.BlocksInfo.Add(item);
-                    //await db.SaveChangesAsync();
                     NewBlock(item);
                 }
-                DataClass.TempList.Clear();
+                DataClass.BlocksTempList.Clear();
+            }
+
+            if (DataClass.ImagesTempList.Count != 0)
+            {
+                foreach (var item in DataClass.ImagesTempList)
+                {
+                    Picture delPict = db.Pictures.FirstOrDefault(x => x.PictureName == item.PictureName);
+                    if (delPict != null)
+                    {
+                        db.Pictures.Remove(delPict);
+
+                    }
+                    NewImage(item);
+                }
+                DataClass.ImagesTempList.Clear();
             }
 
             var blocks = db.BlocksInfo.Where(x => x.ArticleId == article.Id).ToList();
@@ -209,6 +224,13 @@ namespace HistoryPedia.Controllers
             db.SaveChanges();
         }
 
+        [HttpPost]
+        public void NewImage(Picture picture)
+        {
+            db.Pictures.Update(picture);
+            db.SaveChanges();
+        }
+
         [HttpGet, ActionName("DeleteBlock")]
         public async Task<IActionResult> ConfirmDeleteBlock(int idBlock, string name)
         {
@@ -220,7 +242,7 @@ namespace HistoryPedia.Controllers
             }
             else
             {
-                var block = DataClass.TempList.FirstOrDefault(p => p.BlockName == name);
+                var block = DataClass.BlocksTempList.FirstOrDefault(p => p.BlockName == name);
                 return View(block);
             }
 
@@ -244,8 +266,8 @@ namespace HistoryPedia.Controllers
             }
             else
             {
-                var block = DataClass.TempList.FirstOrDefault(p => p.BlockName == name);
-                DataClass.TempList.Remove(block);
+                var block = DataClass.BlocksTempList.FirstOrDefault(p => p.BlockName == name);
+                DataClass.BlocksTempList.Remove(block);
                 DataClass.TempArticle.Blocks.Remove(block);
                 return View("Edit", DataClass.TempArticle);
             }
@@ -259,7 +281,7 @@ namespace HistoryPedia.Controllers
                 BlockInfo blockInfo = await db.BlocksInfo.FirstOrDefaultAsync(p => p.BlockInfoId == idBlock);
                 if (blockInfo != null)
                 {
-                    //blockInfo.PrevId = blockInfo.BlockInfoId;
+                    DataClass.TempBlock = blockInfo;
                     return View(blockInfo);
                 }
             }
@@ -267,14 +289,16 @@ namespace HistoryPedia.Controllers
             {
                 if (blockName != null)
                 {
-                    BlockInfo blockInfo = DataClass.TempList.FirstOrDefault(p => p.BlockName == blockName);
+                    BlockInfo blockInfo = DataClass.BlocksTempList.FirstOrDefault(p => p.BlockName == blockName);
                     blockInfo.PrevName = blockInfo.BlockName;
+                    DataClass.TempBlock = blockInfo;
                     return View(blockInfo);
                 }
                 else
                 {
                     BlockInfo blockInfo = new BlockInfo();
                     blockInfo.ArticleName = DataClass.TempArticle.Name;
+                    DataClass.TempBlock = blockInfo;
                     return View(blockInfo);
 
                 }
@@ -313,12 +337,13 @@ namespace HistoryPedia.Controllers
             }
             else
             {
-                BlockInfo deleteBlockInfo = DataClass.TempList.FirstOrDefault(p => p.BlockName == blockInfo.PrevName);
-                DataClass.TempList.Remove(deleteBlockInfo);
-                DataClass.TempList.Add(blockInfo);
-                article.Blocks = DataClass.TempList;
+                BlockInfo deleteBlockInfo = DataClass.BlocksTempList.FirstOrDefault(p => p.BlockName == blockInfo.PrevName);
+                DataClass.BlocksTempList.Remove(deleteBlockInfo);
+                DataClass.BlocksTempList.Add(blockInfo);
+                article.Blocks = DataClass.BlocksTempList;
             }
 
+            DataClass.TempBlock = null;
             return View("Edit", article);
         }
 
@@ -335,6 +360,86 @@ namespace HistoryPedia.Controllers
         {
             await hubContext.Clients.All.SendAsync("Send", $"{User.Identity.Name}: {message} - {DateTime.Now.ToShortTimeString()}");
             return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> EditPicture(string pictureName, int type)
+        {
+            if (pictureName != null)
+            {
+                Picture picture = await db.Pictures.FirstOrDefaultAsync(p => p.PictureName == pictureName);
+                if (picture == null)
+                {
+                    picture = DataClass.ImagesTempList.FirstOrDefault(p => p.PictureName == pictureName);
+                }
+                if (picture != null)
+                {
+                    PictureViewModel pictureLoad = new PictureViewModel();
+                    pictureLoad.PictureText = picture.PictureText;
+                    pictureLoad.PictureName = picture.PictureName;
+                    pictureLoad.PicturePrevName = pictureLoad.PictureName;
+                    pictureLoad.Type = type;
+                    return View(pictureLoad);
+                }
+            }
+            else
+            {
+                PictureViewModel picture = new PictureViewModel();
+                picture.PictureName = "New picture";
+                picture.Type = type;
+                if (type == 1)
+                {
+                    DataClass.TempArticle.ImageName = picture.PictureName;
+                }
+                else
+                {
+                    DataClass.TempBlock.BlockImageName = picture.PictureName;
+                }
+                return View(picture);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditPicture(PictureViewModel pictureLoad)
+        {
+            Picture picture = new Picture();
+            if (pictureLoad.PicturePrevName != null)
+            {
+                picture = db.Pictures.FirstOrDefault(x => x.PictureName == pictureLoad.PicturePrevName);
+                if (picture == null)
+                {
+                    picture = DataClass.ImagesTempList.FirstOrDefault(p => p.PictureName == pictureLoad.PicturePrevName);
+                }
+            }
+
+            if (pictureLoad.PictureName != null)
+                picture.PictureName = pictureLoad.PictureName;
+            if (pictureLoad.PictureText != null)
+                picture.PictureText = pictureLoad.PictureText;
+            if (pictureLoad.Image != null)
+            {
+                byte[] imageData = null;
+                // считываем переданный файл в массив байтов
+                using (var binaryReader = new BinaryReader(pictureLoad.Image.OpenReadStream()))
+                {
+                    imageData = binaryReader.ReadBytes((int) pictureLoad.Image.Length);
+                }
+
+                // установка массива байтов
+                picture.Image = imageData;
+            }
+
+            DataClass.ImagesTempList.Add(picture);
+
+
+            if (pictureLoad.Type == 1)
+            {
+                DataClass.TempArticle.ImageName = pictureLoad.PictureName;
+                return View("Edit", DataClass.TempArticle);
+            }
+            DataClass.TempBlock.BlockImageName = pictureLoad.PictureName;
+            return View("EditBlock", DataClass.TempBlock);
+
         }
     }
 }

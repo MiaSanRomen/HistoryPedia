@@ -1,0 +1,29 @@
+﻿@model HistoryPedia.ViewModels.PictureViewModel
+@{
+    ViewBag.Title = "Editing new picture";
+}
+<form asp-action="EditPicture" asp-controller="home" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="PictureName" class="control-label">Name</label>
+        <input type="text" asp-for="PictureName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PictureText" class="control-label">Text</label>
+        <input type="text" asp-for="PictureText" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Image" class="control-label">Image</label>
+        <input type="file" asp-for="Image" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Type" hidden="true" class="control-label">Type</label>
+        <input type="int" asp-for="Type" hidden="true" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PicturePrevName" hidden="true" class="control-label">Previous Name</label>
+        <input type="file" asp-for="PicturePrevName" hidden="true" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Confirm" class="btn btn-outline-success" />
+    </div>
+</form>

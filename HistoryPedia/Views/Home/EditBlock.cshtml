@@ -12,24 +12,32 @@
         <input type="text" asp-for="Text" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="BlockImageName" class="control-label">Image</label>
-        <input type="text" asp-for="BlockImageName" class="form-control" />
-    </div>
-    <div class="form-group">
         <label asp-for="ArticleId" class="control-label" hidden="true">Article Id</label>
-        <input type="text" asp-for="ArticleId" class="form-control" hidden="true"/>
+        <input type="text" asp-for="ArticleId" class="form-control" hidden="true" />
     </div>
     <div class="form-group">
         <label asp-for="ArticleName" class="control-label" hidden="true">Article Name</label>
-        <input type="text" asp-for="ArticleName" class="form-control" hidden="true"/>
+        <input type="text" asp-for="ArticleName" class="form-control" hidden="true" />
     </div>
     <div class="form-group">
         <label asp-for="BlockInfoId" class="control-label" hidden="true">Id</label>
-        <input type="text" asp-for="BlockInfoId" class="form-control" hidden="true"/>
+        <input type="text" asp-for="BlockInfoId" class="form-control" hidden="true" />
     </div>
     <div class="form-group">
-        <label asp-for="PrevName" class="control-label" hidden="true" >PrevName</label>
-        <input type="text" asp-for="PrevName" class="form-control" hidden="true"/>
+        <label asp-for="PrevName" class="control-label" hidden="true">PrevName</label>
+        <input type="text" asp-for="PrevName" class="form-control" hidden="true" />
+    </div>
+    <div class="form-group">
+        <label asp-for="BlockImageName" class="control-label">Image</label>
+        @if (Model.BlockImageName != null)
+        {
+            <a class="btn btn-outline-warning btn-block" asp-action="EditPicture" asp-controller="Home" asp-route-pictureName="@Model.BlockImageName" asp-route-type="0">Edit an image</a>
+        }
+        else
+        {
+            <a class="btn btn-outline-info btn-block" asp-action="EditPicture" asp-controller="Home" asp-route-pictureName="@Model.BlockImageName" asp-route-type="0">Add an image</a>
+        }
+        <input type="text" asp-for="BlockImageName" hidden="true" class="form-control" />
     </div>
     <div class="form-group">
         <input type="submit" value="Confirm" class="btn btn-outline-success" />

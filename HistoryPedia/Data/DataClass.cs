@@ -10,7 +10,10 @@ namespace HistoryPedia.Data
     {
 
         public static Article TempArticle = new Article();
-        public static List<BlockInfo> TempList = new List<BlockInfo>();
+        public static BlockInfo TempBlock = new BlockInfo();
+        public static List<BlockInfo> BlocksTempList = new List<BlockInfo>();
+        public static List<Picture> ImagesTempList = new List<Picture>();
+
         public static void Initialize(ArticleContext context)
         {
             if (!context.Articles.Any())
@@ -209,134 +212,134 @@ namespace HistoryPedia.Data
                 context.Pictures.AddRange(
                     new Picture()
                     {
-                        Name = "RomanEmpIco",
+                        PictureName = "RomanEmpIco",
                         Path = "/Images/RomanEmpIco.png",
                     },
                     new Picture()
                     {
-                        Name = "RomanEmp1",
+                        PictureName = "RomanEmp1",
                         Path = "/Images/RomanEmp1.png",
-                        Text = "Map of the Roman Empire"
+                        PictureText = "Map of the Roman Empire"
                     },
                     new Picture()
                     {
-                        Name = "RomanEmp2",
+                        PictureName = "RomanEmp2",
                         Path = "/Images/RomanEmp2.jpg",
-                        Text = "The first Roman emperor Octavian Augustus"
+                        PictureText = "The first Roman emperor Octavian Augustus"
                     },
                     new Picture()
                     {
-                        Name = "ByzantIco",
+                        PictureName = "ByzantIco",
                         Path = "/Images/ByzantIco.png",
                     },
                     new Picture()
                     {
-                        Name = "Byzant1",
+                        PictureName = "Byzant1",
                         Path = "/Images/Byzant1.jpg",
-                        Text = "Map of the Byzantine Empire"
+                        PictureText = "Map of the Byzantine Empire"
                     },
                     new Picture()
                     {
-                        Name = "Byzant2",
+                        PictureName = "Byzant2",
                         Path = "/Images/Byzant2.jpg",
-                        Text = "Byzantine money"
+                        PictureText = "Byzantine money"
                     },
                     new Picture()
                     {
-                        Name = "RepublicIco",
+                        PictureName = "RepublicIco",
                         Path = "/Images/RepublicIco.png",
                     },
                     new Picture()
                     {
-                        Name = "Republic1",
+                        PictureName = "Republic1",
                         Path = "/Images/Republic1.jpg",
-                        Text = "Senate of the republic"
+                        PictureText = "Senate of the republic"
                     },
                     new Picture()
                     {
-                        Name = "Republic2",
+                        PictureName = "Republic2",
                         Path = "/Images/Republic2.jpg",
-                        Text = "Survived temple in Rome"
+                        PictureText = "Survived temple in Rome"
                     },
                     new Picture()
                     {
-                        Name = "CarthageIco",
+                        PictureName = "CarthageIco",
                         Path = "/Images/CarthageIco.png",
                     },
                     new Picture()
                     {
-                        Name = "Carthage1",
+                        PictureName = "Carthage1",
                         Path = "/Images/Carthage1.jpg",
-                        Text = "View on ancient carthage"
+                        PictureText = "View on ancient carthage"
                     },
                     new Picture()
                     {
-                        Name = "Carthage2",
+                        PictureName = "Carthage2",
                         Path = "/Images/Carthage2.jpg",
-                        Text = "Carthage's most popular leader Hannibal Barka"
+                        PictureText = "Carthage's most popular leader Hannibal Barka"
                     },
                     new Picture()
                     {
-                        Name = "PunicIco",
+                        PictureName = "PunicIco",
                         Path = "/Images/PunicIco.jpg",
                     },
                     new Picture()
                     {
-                        Name = "Punic1",
+                        PictureName = "Punic1",
                         Path = "/Images/Punic1.jpg",
-                        Text = "Sea battle of the first punic war"
+                        PictureText = "Sea battle of the first punic war"
                     },
                     new Picture()
                     {
-                        Name = "Punic2",
+                        PictureName = "Punic2",
                         Path = "/Images/Punic2.jpg",
-                        Text = "Battle of the Cannaes"
+                        PictureText = "Battle of the Cannaes"
                     },
                     new Picture()
                     {
-                        Name = "Punic3",
+                        PictureName = "Punic3",
                         Path = "/Images/Punic3.jpg",
-                        Text = "Assault of Carthage"
+                        PictureText = "Assault of Carthage"
                     },
                     new Picture()
                     {
-                        Name = "ArmyIco",
+                        PictureName = "ArmyIco",
                         Path = "/Images/ArmyIco.jpg",
                     },
                     new Picture()
                     {
-                        Name = "Army1",
+                        PictureName = "Army1",
                         Path = "/Images/Army1.jpg",
-                        Text = "Early roman units"
+                        PictureText = "Early roman units"
                     },
                     new Picture()
                     {
-                        Name = "Army2",
+                        PictureName = "Army2",
                         Path = "/Images/Army2.jpg",
-                        Text = "Caesar's legion"
+                        PictureText = "Caesar's legion"
                     },
                     new Picture()
                     {
-                        Name = "Army3",
+                        PictureName = "Army3",
                         Path = "/Images/Army3.jpg",
-                        Text = "Legionaries of Roman Empire"
+                        PictureText = "Legionaries of Roman Empire"
                     },
                     new Picture()
                     {
-                        Name = "Army4",
+                        PictureName = "Army4",
                         Path = "/Images/Army4.jpg",
-                        Text = "Late roman soldiers"
+                        PictureText = "Late roman soldiers"
                     },
                     new Picture()
                     {
-                        Name = "DefIco",
+                        PictureName = "DefIco",
                         Path = "/Images/DefIco.png",
                     },
                     new Picture()
                     {
-                        Name = "Def1",
+                        PictureName = "Def1",
                         Path = "/Images/Def1.jpg",
-                        Text = "What a picture!"
+                        PictureText = "What a picture!"
                     }
                 );
                 context.SaveChanges();

@@ -376,3 +376,4 @@ C:\Users\Andrew\source\repos\MiaSanRomen\HistoryPedia\HistoryPedia\obj\Debug\net
 C:\Users\Andrew\source\repos\MiaSanRomen\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.dll
 C:\Users\Andrew\source\repos\MiaSanRomen\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.pdb
 C:\Users\Andrew\source\repos\MiaSanRomen\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\HistoryPedia.genruntimeconfig.cache
+G:\HistoryPedia\HistoryPedia\obj\Debug\netcoreapp3.1\Razor\Views\Home\EditPicture.cshtml.g.cs
