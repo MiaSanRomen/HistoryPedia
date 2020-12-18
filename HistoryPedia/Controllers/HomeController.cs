@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Web;
 using HistoryPedia.Data;
+using HistoryPedia.Interfaces;
 using HistoryPedia.signalR;
 using HistoryPedia.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -26,13 +27,15 @@ namespace HistoryPedia.Controllers
         private ArticleContext db;
         private readonly ILogger<HomeController> _logger;
         private ApplicationContext dbUsers;
-        IHubContext<ChatHub> hubContext;
+        IHubContext<ChatHub> hubContext; 
+        private readonly IGetArticle _getArticle;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationContext contextApp, ArticleContext contextArt, IHubContext<ChatHub> hubContext)
+        public HomeController(ILogger<HomeController> logger, ApplicationContext contextApp, ArticleContext contextArt, IHubContext<ChatHub> hubContext, IGetArticle getArticle)
         {
             db = contextArt;
             dbUsers = contextApp;
             _logger = logger;
+            _getArticle = getArticle;
             this.hubContext = hubContext;
         }
 
@@ -55,11 +58,11 @@ namespace HistoryPedia.Controllers
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id != null)
+            if (id != 0)
             {
-                Article article = await db.Articles.FirstOrDefaultAsync(p => p.Id == id);
+                Article article = _getArticle.GetObjectArticle(id);
                 article.Blocks = db.BlocksInfo.Where(x => x.ArticleId == article.Id).ToList();
                 var Pictures = db.Pictures;
                 article.Image = Pictures.FirstOrDefault(x => x.PictureName == article.ImageName);
@@ -81,11 +84,11 @@ namespace HistoryPedia.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpGet, ActionName("Delete")]
-        public async Task<IActionResult> ConfirmDelete(int? id)
+        public async Task<IActionResult> ConfirmDelete(int id)
         {
-            if (id != null)
+            if (id != 0)
             {
-                Article article = await db.Articles.FirstOrDefaultAsync(p => p.Id == id);
+                Article article = _getArticle.GetObjectArticle(id);
                 if (article != null)
                     return View(article);
             }
@@ -108,7 +111,7 @@ namespace HistoryPedia.Controllers
 
         public ActionResult Index(string name)
         {
-            var articles = string.IsNullOrEmpty(name)? db.Articles.ToList() : db.Articles.Where(p => p.Name.Contains(name)).ToList();
+            var articles = string.IsNullOrEmpty(name)? _getArticle.GetAllArticles : db.Articles.Where(p => p.Name.Contains(name)).ToList();
             foreach (var item in articles)
             {
                 item.Image = db.Pictures.FirstOrDefault(x => x.PictureName == item.ImageName);
@@ -134,7 +137,7 @@ namespace HistoryPedia.Controllers
         {
             if (id != 0)
             {
-                Article article = await db.Articles.FirstOrDefaultAsync(p => p.Id == id);
+                Article article = _getArticle.GetObjectArticle(id);
                 if (article != null)
                 {
                     article.Blocks = db.BlocksInfo.Where(x => x.ArticleId == article.Id).ToList();
@@ -319,7 +322,8 @@ namespace HistoryPedia.Controllers
             Article article = new Article();
             if (blockInfo.ArticleId != 0)
             {
-                article = await db.Articles.FirstOrDefaultAsync(p => p.Id == blockInfo.ArticleId);
+                //article = await db.Articles.FirstOrDefaultAsync(p => p.Id == blockInfo.ArticleId);
+                article = _getArticle.GetObjectArticle(blockInfo.ArticleId);
             }
             else
             {

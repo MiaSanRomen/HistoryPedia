@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,8 +10,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using HistoryPedia.Data;
+using HistoryPedia.Interfaces;
 using HistoryPedia.logs;
 using HistoryPedia.Models;
+using HistoryPedia.Repositories;
 using HistoryPedia.signalR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
@@ -39,6 +41,19 @@ namespace HistoryPedia
                 options.UseSqlServer(connection));
             services.AddRazorPages();
 
+            services.AddTransient<IEmailService, EmailService>();
+
+            services.AddTransient<IGetArticle, ArticleRepository>();
+
+            services.AddScoped<IGetFavorite, FavoriteRepository>();
+
+            services.AddSingleton<IEmailConfiguration>(new EmailConfiguration
+            {
+                SmtpServer = Configuration["EmailConfiguration:SmtpServer"],
+                SmtpPort = int.Parse(Configuration["EmailConfiguration:SmtpPort"]),
+                SmtpUsername = Configuration["EmailConfiguration:SmtpUsername"],
+                SmtpPassword = Configuration["EmailConfiguration:SmtpPassword"]
+            });
 
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AccountConnection")));
@@ -53,7 +68,9 @@ namespace HistoryPedia
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            if (env.IsDevelopment())
+            //компоненты конвейера, которые отвечают за обработку запроса, называются middleware
+
+            if (env.IsDevelopment())  
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
@@ -64,16 +81,17 @@ namespace HistoryPedia
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseHttpsRedirection();          //перенаправляет все запросы HTTP на HTTPS
+            app.UseStaticFiles();           //предоставляет поддержку обработки статических файлов
 
-            app.UseRouting();
+            app.UseRouting();                   // Компонент маршрутизации
 
-            app.UseAuthentication();
+            app.UseAuthentication();                //поддержка аутентификации
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints =>               //отправляет ответ, если запрос пришел по маршруту
             {
+                //Метод Map применяется для сопоставления пути запроса с определенным делегатом, который будет обрабатывать запрос по этому пути
                 endpoints.MapHub<ChatHub>("/chat");
                 //endpoints.MapControllerRoute(
                 //    name: "default",

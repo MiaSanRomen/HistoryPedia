@@ -187,3 +187,4 @@ G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\Razor\Views\Users\Create.
 G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\Razor\Views\Users\Edit.cshtml.g.cs
 G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\Razor\Views\Users\EditRoles.cshtml.g.cs
 G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\Razor\Views\Users\Index.cshtml.g.cs
+G:\HistoryPedia\HistoryPedia\obj\Release\netcoreapp3.1\Razor\Views\Home\EditPicture.cshtml.g.cs

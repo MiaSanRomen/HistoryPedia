@@ -12,11 +12,13 @@ namespace CustomIdentityApp.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IEmailService _emailService;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailService = emailService;
         }
         [HttpGet]
         public IActionResult Register()
@@ -39,8 +41,7 @@ namespace CustomIdentityApp.Controllers
                         "Account",
                         new { userId = user.Id, code = code },
                         protocol: HttpContext.Request.Scheme);
-                    EmailService emailService = new EmailService();
-                    await emailService.SendEmailAsync(model.UserName, model.Email, "Confirm your account",
+                    await _emailService.SendEmailAsync(model.UserName, model.Email, "Confirm your account",
                         $"Confirm registration, going by the link: <a href='{callbackUrl}'>link</a>");
 
                     return Content("To complete the registration, check your email and follow the link provided in the letter");

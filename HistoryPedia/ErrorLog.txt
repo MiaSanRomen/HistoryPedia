@@ -29,3 +29,4 @@ Error Number:207,State:1,Class:16
 An unhandled exception has occurred while executing the request.
 An unhandled exception has occurred while executing the request.
 An unhandled exception has occurred while executing the request.
+User b71bfac8-d8b4-483d-95fb-f30183a9771e validation failed: DuplicateUserName.

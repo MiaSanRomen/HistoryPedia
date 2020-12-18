@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HistoryPedia.Data;
+using HistoryPedia.Interfaces;
 using HistoryPedia.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,29 +15,21 @@ namespace HistoryPedia.Controllers
     {
         private ArticleContext db;
         private ApplicationContext dbUsers;
-        public FavoriteController(ApplicationContext contextApp, ArticleContext contextArt)
+        private readonly IGetFavorite _getFavorite;
+        private readonly IGetArticle _getArticle;
+        public FavoriteController(ApplicationContext contextApp, ArticleContext contextArt, IGetFavorite getFavorite, IGetArticle getArticle)
         {
             db = contextArt;
             dbUsers = contextApp;
+            _getFavorite = getFavorite;
+            _getArticle = getArticle;
         }
 
         public ActionResult Index()
         {
             User user = dbUsers.Users.ToList().FirstOrDefault(g => g.UserName == User.Identity.Name);
-            user.FavoriteArticles = db.Articles.Where(x => x.UserId == user.Id).ToList();
-            ////ManyToManyLink.NewUser(user.UserName);
-            //foreach (var item in ManyToManyLink.UsersToArticles[user.UserName])
-            //{
-            //    var article = db.Articles.FirstOrDefault(x => x.Id == item.Id);
-            //    if (user.FavoriteArticles == null)
-            //    {
-            //        user.FavoriteArticles = new List<Article>() { article };
-            //    }
-            //    else
-            //    {
-            //        user.FavoriteArticles.Add(article);
-            //    }
-            //}
+            user.FavoriteArticles = _getFavorite.GetFavorite(user.Id);
+            
             if (user.FavoriteArticles != null)
             {
                 foreach (var item in user.FavoriteArticles)
@@ -56,7 +49,6 @@ namespace HistoryPedia.Controllers
             if (article != null)
             {
                 article.UserId = user.Id;
-                //ManyToManyLink.NewLink(user.UserName, article);
             }
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
