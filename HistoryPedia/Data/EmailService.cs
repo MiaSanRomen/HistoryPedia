@@ -17,7 +17,7 @@ namespace HistoryPedia.Data
         public EmailService(IEmailConfiguration emailConfiguration)
         {
             _emailConfiguration = emailConfiguration;
-            smtpClient.Connect(_emailConfiguration.SmtpServer, _emailConfiguration.SmtpPort, true);
+            smtpClient.Connect(_emailConfiguration.SmtpServer, _emailConfiguration.SmtpPort, false);
 
             smtpClient.Authenticate(_emailConfiguration.SmtpUsername, _emailConfiguration.SmtpPassword);
         }

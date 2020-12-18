@@ -1094,3 +1094,27 @@ Application started. Press Ctrl+C to shut down.
 Hosting environment: Development
 Content root path: G:\HistoryPedia\HistoryPedia
 User b71bfac8-d8b4-483d-95fb-f30183a9771e validation failed: DuplicateUserName.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: G:\HistoryPedia\HistoryPedia
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Production
+Content root path: G:\HistoryPedia\HistoryPedia
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Production
+Content root path: G:\HistoryPedia\HistoryPedia
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Production
+Content root path: G:\HistoryPedia\HistoryPedia
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Production
+Content root path: G:\HistoryPedia\HistoryPedia
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Production
+Content root path: G:\HistoryPedia\HistoryPedia
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Production
+Content root path: G:\HistoryPedia\HistoryPedia
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Production
+Content root path: G:\HistoryPedia\HistoryPedia
