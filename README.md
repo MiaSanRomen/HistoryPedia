@@ -13,3 +13,5 @@ In development used and realised:
 - Logs
 - work with configurations
 ```
+
+- Done in 2020
